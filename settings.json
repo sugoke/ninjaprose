@@ -1,0 +1,17 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb+srv://sugoke:Luxembourg01@prose.yqcbni4.mongodb.net/?retryWrites=true&w=majority",
+      "OPENAI_API_KEY": "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",
+      "STRIPE_SECRET_KEY": "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",
+      "PRICE_ID": "price_1NNbgVI01LsmAZDbDkU3K6Xe",
+      "MAIL_URL": "smtp://leregina06@gmail.com:FDB49AC32542B83423ACAD0E6388F938853C@smtp.elasticemail.com:2525",
+      "ROOT_URL": "https://prose.ninja"
+    }
+  },
+  "public": {
+    "STRIPE_PUBLIC_KEY": "pk_live_51N85NmI01LsmAZDbpOtvhKjVNnlUJL3Hnc5G6xWvo9sUwZoaSIgu8sEhNC5lWiOfmbr7lxLfDWMNhZJtGQr2ntNH00t3r32I2j",
+    "PRICE_ID_EUR": "price_1No210I01LsmAZDb0m2rRK7J",
+    "PRICE_ID_USD": "price_1No1zeI01LsmAZDbBKzOJmnH"
+  }
+}

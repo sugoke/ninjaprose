@@ -1,0 +1,437 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/ninja-naruto');
+
+  body {
+    background: rgb(58,72,180);
+background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+     font-family: 'Roboto', sans-serif;  /* or 'Montserrat', sans-serif; */
+      font-size: 16px; /* Add this line */
+    }
+
+    @keyframes pulsate {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    a.register-link {
+        background-color: #FF4500;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px; /* Rounded corners */
+        text-decoration: none; /* Remove the underline */
+        transition: background-color 0.3s ease;
+        display: inline-block; /* Needed for transform to work on inline elements like 'a' */
+
+        /* Animation properties */
+        animation: pulsate 1.5s infinite; /* The animation will last 1.5 seconds and repeat indefinitely */
+    }
+
+    a.register-link:hover {
+        background-color: #FF6347; /* Slightly different shade for hover */
+    }
+
+
+    h1 {
+        font-family: 'Ninja Naruto', sans-serif;
+        font-weight: 700;  /* This makes it bold */
+        font-size: 5em;
+        color: #000;
+        text-align: center;  /* Centering the text, optional */
+        margin-top: 50px;    /* Giving it some space from the top, optional */
+    }
+
+    h2 {
+        font-family: 'Ninja Naruto', sans-serif;
+        font-weight: 700;  /* This makes it bold */
+        font-size: 2.5em;
+        color: #000;
+        text-align: center;  /* Centering the text, optional */
+        margin-top: 50px;    /* Giving it some space from the top, optional */
+    }
+
+    @keyframes ninjaEnter {
+        0% {
+            opacity: 0;
+            transform: translateX(-50px); /* Title starts slightly to the left */
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0); /* Title ends in its original position */
+        }
+    }
+
+    h1.ninja-title {
+        opacity: 0; /* Start invisible */
+        transform: translateX(-50px); /* Start slightly to the left */
+        animation: ninjaEnter 0.4s forwards; /* Apply the animation */
+    }
+
+
+
+
+    .small-text {
+        font-size: 0.7em; /* adjust as necessary */
+    }
+
+
+
+    .my-login-form {
+      display: flex;
+      align-items: center;
+    }
+
+    .my-login-form label,
+    .my-login-form input,
+    .my-login-form button {
+      margin-right: 10px;
+    }
+
+    .my-form button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #ffd700; /* gold color */
+  color: #000000; /* black text */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 50px; /* creates rounded corners */
+}
+
+.my-form button:hover {
+  background-color: #b8860b; /* dark golden color */
+}
+
+
+
+    .footer {
+        background-color: rgba(255,255,255,0.7);
+        padding: 20px;
+        color: #8a6d3b;
+        text-align: center;
+        border-radius: 20px;
+    }
+
+    .my-login-form button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      background-color: #ffd700; /* gold color */
+      color: #000000; /* black text */
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border-radius: 50px; /* more rounded corners */
+    }
+
+    .my-login-form button:hover {
+      background-color: #b8860b; /* dark golden color */
+    }
+
+
+    .container {
+      background-color: rgba(255,255,255,0.7);
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .navbar {
+      background-color: rgba(0,0,0,0.7) !important;
+    }
+
+    .navbar-brand, .navbar-nav li a {
+      color: white !important;
+    }
+
+    .btn-outline-success {
+      border-color: #DAA520 !important;
+      color: #DAA520 !important;
+    }
+
+    .btn-outline-success:hover {
+      background-color: #DAA520 !important;
+      color: #ffffff !important;
+    }
+
+    .btn-primary {
+      background-color: #DAA520 !important;
+      border-color: #DAA520 !important;
+    }
+
+    .btn-primary:hover {
+      background-color: #B8860B !important;
+      border-color: #B8860B !important;
+    }
+
+    .output-box {
+    display: none;
+}
+
+
+    textarea, select, button {
+      border-radius: 0 !important;
+    }
+
+    .navbar-nav .nav-link {
+        color: #DAA520 !important; /* Gold color */
+    }
+
+    textarea {
+
+            padding-right: 70px; /* Adjust based on the width of your buttons */
+            box-sizing: border-box;
+        }
+
+
+    #overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #3498db;
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 2s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+  #card-element {
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+
+  #card-element--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+
+  #card-element--invalid {
+    border-color: #fa755a;
+  }
+
+  #card-element--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+
+  .profile-link {
+  margin-right: 20px;
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#logoutModal {
+  z-index: 10550 !important;
+}
+
+#profileModal {
+  z-index: 10400 !important;
+}
+
+.flag-icon {
+  height: 16px;
+  float: right;
+}
+
+
+
+.container {
+  margin-top: 50px; /* Adjust the space above the container as needed */
+  text-align: center;
+}
+
+.hero {
+  margin: 20px 0; /* Adds some space between the hero section and other elements */
+}
+
+.features {
+  /* Additional styling for the features section */
+}
+
+.gif-frame {
+  border: 10px solid #ccc; /* Adjust the border size and color to your liking */
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+  display: inline-block; /* Keeps the frame tightly around the image */
+  background-color: #f9f9f9; /* Optional: background color inside the frame */
+  border-radius: 10px; /* Optional: rounded corners */
+}
+
+.gif-frame img {
+  max-width: 100%;
+  height: auto;
+}
+
+.header-content {
+    display: flex;
+    align-items: center; /* align vertically */
+}
+
+.logo {
+    width: 15%; /* or whatever size you prefer */
+    height: 15%;
+    margin-right: 15px; /* space between the logo and the title */
+}
+
+header h1, header p {
+    margin: 0; /* remove default margins */
+}
+
+.custom-container {
+    display: flex;         /* use flexbox layout */
+    align-items: center;   /* vertically center items */
+}
+
+.logo-container {
+    width: 40%;            /* set width of logo container */
+    display: flex;
+    align-items: center;   /* vertically center the logo inside its container */
+    justify-content: center; /* horizontally center the logo */
+}
+
+.logo-image {
+    width: 100%;           /* make logo take full width of its container */
+    max-width: 100%;       /* ensure it doesn't exceed container size */
+}
+
+.text-container {
+    width: 85%;            /* remaining space after the logo */
+    text-align: center;      /* text is left-aligned */
+}
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* changed from row to column */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    z-index: 9999;
+}
+
+.loading-logo {
+    width: 200px; /* doubled from previous */
+    margin-bottom: 20px; /* some space between the logo and spinner */
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #fff;
+    width: 55px;
+    height: 55px;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 20px; /* space between spinner and the text */
+}
+
+.loading-text {
+    color: #fff; /* white color */
+    font-size: 30px;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Styling the input field */
+      input[type="text"] {
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+
+      /* Styling the placeholder text */
+      input[type="text"]::placeholder {
+          color: gray; /* Gray color for the placeholder text */
+          font-style: italic; /* Italic style for the placeholder text */
+      }
+
+
+      .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        display: none; /* Initially hidden */
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .high-z-index {
+  z-index: 1000050;
+}
+
+.low-z-index {
+z-index: 10;
+}
+
+.swal2-container-class {
+  z-index: 20000 !important;  /* Choose a high value that is above your highest modal z-index */
+}
+
+.currency-button.active {
+  background-color: purple !important;
+  color: white;
+  border-color: purple !important;
+}
+
+.currency-button {
+  border-radius: 12px !important;
+}
+
+.btn-group-toggle .btn:not(:disabled):not(.disabled).active {
+  color: white;
+  background-color: purple !important;
+  border-color: purple !important;
+}

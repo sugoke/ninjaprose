@@ -435,3 +435,13 @@ z-index: 10;
   background-color: purple !important;
   border-color: purple !important;
 }
+
+.language-switcher {
+  display: flex;
+  justify-content: center;
+}
+
+.language-button img {
+  width: 20px;
+  height: auto;
+}

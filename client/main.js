@@ -879,8 +879,22 @@ if (!cardHolderName) {
 });
 
 Template.body.events({
-  'change #language-switcher': function(event) {
-    const language = event.target.value;
-    TAPi18n.setLanguage(language);
-  }
+  'click #switchToEnglish': function() {
+     TAPi18n.setLanguage('en')
+       .done(function () {
+         console.log("Language switched to English");
+       })
+       .fail(function (error_message) {
+        // console.log(error_message);
+       });
+   },
+   'click #switchToFrench': function() {
+     TAPi18n.setLanguage('fr')
+       .done(function () {
+         console.log("Language switched to French");
+       })
+       .fail(function (error_message) {
+      //   console.log(error_message);
+       });
+   }
 });

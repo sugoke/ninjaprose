@@ -39,25 +39,35 @@
   </select>
 
 -->
+<div class="language-switcher">
+  <button class="language-button" id="switchToEnglish">
+    <img src="https://flagicons.lipis.dev/flags/4x3/gb.svg" alt="English">
+  </button>
+  <button class="language-button" id="switchToFrench">
+    <img src="https://flagicons.lipis.dev/flags/4x3/fr.svg" alt="Français">
+  </button>
+</div>
 
-  <div id="hourlyLimit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="limitModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="limitModalLabel">{{_ "submission_limit_title"}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="{{_ "close_button"}}">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{_ "submission_limit_body"}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close_button"}}</button>
-        </div>
+
+<div id="hourlyLimit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="limitModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="limitModalLabel">{{_ "submission_limit_title"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{_ "close_button"}}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{_ "submission_limit_body"}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close_button"}}</button>
       </div>
     </div>
   </div>
+</div>
+
 
 
 
@@ -81,21 +91,21 @@
 
 
         <div class="modal-header">
-          <h5 class="modal-title" id="subscribeModalLabel">Subscription Required</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="subscribeModalLabel">{{_ "subscription_required_title"}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="{{_ "close_button"}}">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          You have exceeded your daily limit of 1 free text generation. Please subscribe to continue using this service.
+          {{_ "subscription_required_body"}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close_button"}}</button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">
-
-            Subscribe
+            {{_ "subscribe_button"}}
           </button>
         </div>
+
 
       </div>
     </div>
@@ -123,7 +133,8 @@
         </div>
 
         <div class="mb-3">
-          <label for="currency-selector" class="form-label">Billing Currency</label>
+          <label for="currency-selector" class="form-label">{{_ "billingCurrency"}}</label>
+
           <div id="currency-selector" class="btn-group btn-group-toggle d-block rounded" data-toggle="buttons">
             <label class="btn btn-outline-secondary active currency-button rounded">
               <input type="radio" name="currency" id="EUR" value="EUR" checked> EUR
@@ -139,17 +150,17 @@
 
 
         <div class="mb-3">
-          <label for="card-holder-name" class="form-label">Card Holder's Name</label>
-          <input type="text" class="form-control" id="card-holder-name" required>
-        </div>
+                  <label for="card-holder-name" class="form-label">{{_ "cardHoldersName"}}</label>
+                  <input type="text" class="form-control" id="card-holder-name" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">{{_ "email"}}</label>
+                  <input type="email" class="form-control" id="email" value="{{userEmail}}" required readonly>
+                </div>
 
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" value="{{userEmail}}" required readonly>
-
-        </div>
-        <div class="mb-3">
-          <label for="payment-element" class="form-label">Card Details</label>
+          <label for="payment-element" class="form-label">{{_ "cardDetails"}}</label>
           <div id="payment-element" class="form-control">
             <!-- Stripe Payment Element will be inserted here. -->
           </div>
@@ -158,7 +169,7 @@
         <div id="payment-errors" role="alert" class="mb-3 text-danger"></div>
         <button type="submit" id="submit-button" class="btn btn-primary">
           <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="spinner"></span>
-          Submit Payment
+          {{_ "submitPayment"}}
         </button>
 
       </form>
@@ -174,49 +185,41 @@
 
 <template name="navBar">
 
-
   <!-- Logout Confirmation Modal -->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
+          <h5 class="modal-title" id="logoutModalLabel">{{_ "logoutConfirmation"}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Are you sure you want to logout?
+          {{_ "logoutConfirmationMessage"}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" id="confirm-logout">Yes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "no"}}</button>
+          <button type="button" class="btn btn-primary" id="confirm-logout">{{_ "yes"}}</button>
         </div>
       </div>
     </div>
   </div>
 
-
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-light bg-light">
     <span class="navbar-text float-left">
-
-      <a href="#" id="profile-link" data-toggle="modal" data-target="#profileModal">Profile</a>
+      <a href="#" id="profile-link" data-toggle="modal" data-target="#profileModal">{{_ "profile"}}</a>
     </span>
-
-    <!--
-    <span class="navbar-text float-right">
-      <a href="#" class="float-right" data-lang="en" style="margin-left: 10px;"><img src="https://icons.iconarchive.com/icons/icons-land/vista-flags/256/English-Language-Flag-1-icon.png" alt="English" class="flag-icon" style="height: 32px;"> </a>
-      <a href="#" class="float-right" data-lang="fr" style="margin-left: 10px;"><img src="https://icons.iconarchive.com/icons/wikipedia/flags/256/FR-France-Flag-icon.png" alt="French" class="flag-icon" style="height: 32px;"></a>
-    </span>
--->
-
   </nav>
+
 
     <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+            <h5 class="modal-title" id="profileModalLabel">{{_ "userProfile"}}</h5>
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -225,86 +228,83 @@
             <div class="card">
               <div class="card-body">
                 <table class="table table-borderless">
-                  <tr>
-                    <th scope="row">Email:</th>
-                    <td>{{email}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Subscription Status:</th>
-                    <td>
-                      {{#if isPaying}}
-                        {{#if cancelAtPeriodEnd}}
-                          {{#if subscriptionStatus}}
-                            {{#if $eq subscriptionStatus 'active'}}
-                              Paying User
-                            {{/if}}
-                          {{else}}
-                            Paying User (Cancelled, active until next billing date)
-                          {{/if}}
-                        {{else}}
-                          Paying User
-                        {{/if}}
-                      {{else}}
-                        Free User
-                      {{/if}}
-                    </td>
-                  </tr>
-                  {{#if shouldShowNextBillingDate}}
-                    {{#if subscriptionEndsAt}}
-                      <tr>
-                        <th scope="row">Next Billing Date:</th>
-                        <td>{{subscriptionEndsAt}}</td>
-                      </tr>
-                    {{/if}}
+        <tr>
+          <th scope="row">{{_ "email"}}</th>
+          <td>{{email}}</td>
+        </tr>
+        <tr>
+          <th scope="row">{{_ "subscriptionStatus"}}</th>
+          <td>
+            {{#if isPaying}}
+              {{#if cancelAtPeriodEnd}}
+                {{#if subscriptionStatus}}
+                  {{#if $eq subscriptionStatus 'active'}}
+                    {{_ "payingUser"}}
                   {{/if}}
+                {{else}}
+                  {{_ "payingUserCancelled"}}
+                {{/if}}
+              {{else}}
+                {{_ "payingUser"}}
+              {{/if}}
+            {{else}}
+              {{_ "freeUser"}}
+            {{/if}}
+          </td>
+        </tr>
+        {{#if shouldShowNextBillingDate}}
+          {{#if subscriptionEndsAt}}
+            <tr>
+              <th scope="row">{{_ "nextBillingDate"}}</th>
+              <td>{{subscriptionEndsAt}}</td>
+            </tr>
+          {{/if}}
+        {{/if}}
+        <tr>
+          <th scope="row">{{_ "emailVerified"}}</th>
+          <td>
+            {{#if emailVerified}}
+              {{_ "yes"}}
+            {{else}}
+              {{_ "no"}} - <a href="#" id="resendVerificationLink">{{_ "resendVerificationEmail"}}</a>
+            {{/if}}
+          </td>
+        </tr>
+        {{#if isPaying}}
+          {{#unless cancelAtPeriodEnd}}
+            <tr>
+              <td colspan="2"><a href="#" id="unsubscribeLink" data-toggle="modal" data-target="#unsubscribeModal">{{_ "unsubscribe"}}</a></td>
+            </tr>
+          {{else}}
+            <tr>
+              <th scope="row">{{_ "cancellationInProcess"}}</th>
+              <td>{{_ "yes"}}</td>
+            </tr>
+            {{#if isBillingDatePast}}
+              <tr>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">
+                  {{_ "subscribeAgain"}}
+                </button>
+              </tr>
+            {{/if}}
+          {{/unless}}
+        {{else}}
+        {{#if hasSubscribed}}
+          <tr>
+            <th scope="row">{{_ "cancellationInProcess"}}</th>
+            <td>{{_ "no"}}</td>
+          </tr>
+        {{/if}}
+        {{/if}}
+      </table>
 
-                  <tr>
-                    <th scope="row">Email Verified:</th>
-                    <td>
-                      {{#if emailVerified}}
-                        Yes
-                      {{else}}
-                        No - <a href="#" id="resendVerificationLink">Resend Verification Email</a>
-                      {{/if}}
-                    </td>
-                  </tr>
-
-                  {{#if isPaying}}
-                    {{#unless cancelAtPeriodEnd}}
-                      <tr>
-                        <td colspan="2"><a href="#" id="unsubscribeLink" data-toggle="modal" data-target="#unsubscribeModal">Unsubscribe</a></td>
-                      </tr>
-                    {{else}}
-                      <tr>
-                        <th scope="row">Cancellation in Process:</th>
-                        <td>Yes</td>
-                      </tr>
-                      {{#if isBillingDatePast}}
-                        <tr>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">
-
-                            Subscribe again
-                          </button>
-                        </tr>
-                      {{/if}}
-                    {{/unless}}
-                  {{else}}
-                  {{#if hasSubscribed}}
-                    <tr>
-                      <th scope="row">Cancellation in Process:</th>
-                      <td>No</td>
-                    </tr>
-                  {{/if}}
-                  {{/if}}
-
-
-                </table>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="logout-button">Logout</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="logout-button">{{_ "logout"}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close"}}</button>
+
           </div>
         </div>
       </div>
@@ -315,7 +315,8 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+          <h5 class="modal-title" id="profileModalLabel">{{_ "userProfile"}}</h5>
+
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -325,83 +326,80 @@
             <div class="card-body">
               <table class="table table-borderless">
                 <tr>
-                  <th scope="row">Email:</th>
+                  <th scope="row">{{_ "email"}}</th>
                   <td>{{email}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Subscription Status:</th>
+                  <th scope="row">{{_ "subscriptionStatus"}}</th>
                   <td>
                     {{#if isPaying}}
                       {{#if cancelAtPeriodEnd}}
                         {{#if subscriptionStatus}}
                           {{#if $eq subscriptionStatus 'active'}}
-                            Paying User
+                            {{_ "payingUser"}}
                           {{/if}}
                         {{else}}
-                          Paying User (Cancelled, active until next billing date)
+                          {{_ "payingUserCancelled"}}
                         {{/if}}
                       {{else}}
-                        Paying User
+                        {{_ "payingUser"}}
                       {{/if}}
                     {{else}}
-                      Free User
+                      {{_ "freeUser"}}
                     {{/if}}
                   </td>
                 </tr>
                 {{#if shouldShowNextBillingDate}}
                   {{#if subscriptionEndsAt}}
                     <tr>
-                      <th scope="row">Next Billing Date:</th>
+                      <th scope="row">{{_ "nextBillingDate"}}</th>
                       <td>{{subscriptionEndsAt}}</td>
                     </tr>
                   {{/if}}
                 {{/if}}
-
                 <tr>
-                  <th scope="row">Email Verified:</th>
+                  <th scope="row">{{_ "emailVerified"}}</th>
                   <td>
                     {{#if emailVerified}}
-                      Yes
+                      {{_ "yes"}}
                     {{else}}
-                      No - <a href="#" id="resendVerificationLink">Resend Verification Email</a>
+                      {{_ "no"}} - <a href="#" id="resendVerificationLink">{{_ "resendVerificationEmail"}}</a>
                     {{/if}}
                   </td>
                 </tr>
-
                 {{#if isPaying}}
                   {{#unless cancelAtPeriodEnd}}
                     <tr>
-                      <td colspan="2"><a href="#" id="unsubscribeLink" data-toggle="modal" data-target="#unsubscribeModal">Unsubscribe</a></td>
+                      <td colspan="2"><a href="#" id="unsubscribeLink" data-toggle="modal" data-target="#unsubscribeModal">{{_ "unsubscribe"}}</a></td>
                     </tr>
                   {{else}}
                     <tr>
-                      <th scope="row">Cancellation in Process:</th>
-                      <td>Yes</td>
+                      <th scope="row">{{_ "cancellationInProcess"}}</th>
+                      <td>{{_ "yes"}}</td>
                     </tr>
                     {{#if isBillingDatePast}}
                       <tr>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">
-
-                          Subscribe again
+                          {{_ "subscribeAgain"}}
                         </button>
                       </tr>
                     {{/if}}
                   {{/unless}}
                 {{else}}
                   <tr>
-                    <th scope="row">Cancellation in Process:</th>
-                    <td>No</td>
+                    <th scope="row">{{_ "cancellationInProcess"}}</th>
+                    <td>{{_ "no"}}</td>
                   </tr>
                 {{/if}}
-
-
               </table>
+
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="logout-button">Logout</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="logout-button">{{_ "logout"}}</button>
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close"}}</button>
+
         </div>
       </div>
     </div>
@@ -467,7 +465,8 @@
         <div class="text-container">
           <h1 class="ninja-title">Prose Ninja!</h1>
           <p><br></p>
-          <p>Your personal writing assistant.</p>
+          <p>{{_ "yourPersonalWritingAssistant"}}</p>
+
           <p><br></p>
 
 
@@ -480,17 +479,11 @@
     </header>
 
     <div class="container text-center">
-
       <section class="hero">
-
         <section class="features">
-          <h2>Unleash Your Creativity</h2>
-
-          <p></p>
-          <p>Type or paste a raw text and the intelligent engine will output a polished text in seconds.</p>
-          <p><br></p>
-          <p></p>
-          <p><h2>DEMO</h2></p>
+          <h2>{{_ "unleashYourCreativity"}}</h2>
+          <p>{{_ "typeOrPaste"}}</p>
+          <p><h2>{{_ "demo"}}</h2></p>
           <!-- Add more features as needed -->
         </section>
 
@@ -500,8 +493,9 @@
           </div>
         </div>
       </section>
-      <p>Prose Ninja is the perfect companion for writers, students, professionals, and anyone who wants to write with ease and style. Our intelligent engine helps you create beautiful text that resonates with your audience.</p>
+      <p>{{_ "proseNinjaDesc"}}</p>
     </div>
+
 
 
   {{/if}}
@@ -515,9 +509,10 @@
         <!-- If the user has cancelled but still has access -->
         {{#if clientHasCancelled}}
           <div class="container mt-5">
-            <h2>Subscription Ending Soon</h2>
-            <p>Your subscription is ending soon, but you still have access to premium features. Would you like to re-subscribe?</p>
-            <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">Re-Subscribe</button></p>
+            <h2>{{_ "subscriptionEndingSoon"}}</h2>
+  <p>{{_ "subscriptionEndingText"}}</p>
+  <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">{{_ "resubscribeButton"}}</button></p>
+
           </div>
         {{else}}
           <!-- show some premium features -->
@@ -527,8 +522,9 @@
               <img src="logo.png" alt="Logo" class="logo-image">
             </div>
             <div class="text-container">
-              <h2>Premium plan</h2>
-              <p>Thanks for being a subscriber! Enjoy your premium features.</p>
+              <h2>{{_ "premiumPlan"}}</h2>
+              <p>{{_ "thanksForSubscribing"}}</p>
+
 
 
             </div>
@@ -544,24 +540,19 @@
             <img src="logo.png" alt="Logo" class="logo-image">
           </div>
           <div class="text-container">
+    {{#if hasVerifiedEmail}}
+      <h2>{{_ "freePlan"}}</h2>
+      <br>
+      <p>{{_ "freeUserMessage"}}</p>
+      <p>{{_ "cancelAnytime"}}</p>
+      <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">{{_ "subscribe"}}</button></p>
+    {{else}}
+      <h2>{{_ "pleaseVerifyEmail"}}</h2>
+      <p>{{_ "emailNotVerified"}}</p>
+      <p>{{_ "checkSpam"}}</p>
+    {{/if}}
+  </div>
 
-            {{#if hasVerifiedEmail}}
-
-              <h2>Free plan</h2>
-              <br>
-              <p>As a free user, you get 1 text submission a day. Please subscribe for 9 EUR a month in order to use it fully.</p>
-              <p>You can cancel anytime</p>
-              <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">Subscribe</button></p>
-
-            {{else}}
-
-              <h2>Please verify your e-mail</h2>
-              <p>Your e-mail is not verified, please click the link in your inbox.</p>
-              <p>Check your spam folder</p>
-
-            {{/if}}
-
-          </div>
 
 
 
@@ -577,7 +568,8 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="checkoutModalLabel">Subscribe</h5>
+              <h5 class="modal-title" id="checkoutModalLabel">{{_ "subscribeModalTitle"}}</h5>
+
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -602,19 +594,18 @@
     {{#if hasVerifiedEmail}}
 
       <div class="container mt-5">
-        <h2>Prose Ninja!</h2>
-
-
-        <p>This application allows you to enhance your text using AI. Simply enter your text, choose your parameters, and click Submit.</p>
+        <h2>{{_ "proseNinja"}}</h2>
+        <p>{{_ "applicationDescription"}}</p>
 
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#tab1">Polish your writing</a>
+            <a class="nav-link active" data-toggle="tab" href="#tab1">{{_ "polishYourWriting"}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#tab2">Reply to a message</a>
+            <a class="nav-link" data-toggle="tab" href="#tab2">{{_ "replyToMessage"}}</a>
           </li>
         </ul>
+
 
         <div class="tab-content mt-3">
           <!-- Tab 1 content -->
@@ -655,7 +646,8 @@
 
 
 
-            <button class="btn btn-primary mb-3" id="submit">Submit</button>
+            <button class="btn btn-primary mb-3" id="submit">{{_ "submit"}}</button>
+
 
             <div class="form-group position-relative">
               <textarea class="form-control output-box" id="polishedText" style="display: none;" rows="16"></textarea>
@@ -681,7 +673,8 @@
                 <button class="btn btn-sm btn-outline-success" type="button" id="clearBtn2"><i class="fas fa-times"></i></button>
               </div>
             </div>
-            <p>In short, what do you want to reply?</p>
+            <p>{{_ "shortReplyPrompt"}}</p>
+
             <div class="form-group position-relative">
               <textarea class="form-control" id="answer" rows="7" placeholder="Type here the idea your reply should convey."></textarea>
               <div class="position-absolute d-flex justify-content-end" style="top: 0; right: 0;">
@@ -693,7 +686,8 @@
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                  <label for="parameters1Tab2">Language:</label>
+                  <label for="parameters1Tab2">{{_ "languageLabel"}}</label>
+
                   <select class="form-control" id="language2">
                     {{#each languageOptions}}
                       <option value="{{this}}">{{this}}</option>
@@ -704,7 +698,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                  <label for="parameters2Tab2">Tone:</label>
+                  <label for="parameters2Tab2">{{_ "toneLabel"}}</label>
+
                   <select class="form-control" id="tonality2">
                     {{#each formalityOptions}}
                       <option value="{{this}}">{{this}}</option>
@@ -715,7 +710,8 @@
               </div>
             </div>
 
-            <button class="btn btn-primary mb-3" id="submit2">Submit</button>
+            <button class="btn btn-primary mb-3" id="submit2">{{_ "submitButton"}}</button>
+
 
             <div class="form-group position-relative">
               <textarea class="form-control" id="replyToMessage" rows="16" style="display: none;"></textarea>
@@ -746,12 +742,13 @@
     </script>
 
 
-  <div class="container text-center">
-    <p class="small-text">Copyright © 2023 Prose Ninja</p>
-    <p class="small-text">This is an AI-powered application. The translations are generated by machine learning models and might not be 100% accurate.</p>
-    <p class="small-text">Use of this site constitutes acceptance of our <a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a> and <a href="#" data-toggle="modal" data-target="#privacyPolicy">Privacy Policy</a>.</p>
-    <p class="small-text">For support, please contact <a href="mailto:support@prose.ninja">support@prose.ninja</a>.</p>
-  </div>
+    <div class="container text-center">
+      <p class="small-text">{{_ "copyrightText"}}</p>
+      <p class="small-text">{{_ "aiPoweredText"}}</p>
+      <p class="small-text">{{_ "useOfSiteText"}} <a href="#" data-toggle="modal" data-target="#termsModal">{{_ "termsOfService"}}</a> {{_ "and"}} <a href="#" data-toggle="modal" data-target="#privacyPolicy">{{_ "privacyPolicy"}}</a>.</p>
+      <p class="small-text">{{_ "forSupportText"}} <a href="mailto:support@prose.ninja">{{_ "supportEmail"}}</a>.</p>
+    </div>
+
 
 
   <!-- The Modal -->
@@ -760,49 +757,45 @@
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Terms of Service</h4>
+          <h4 class="modal-title">{{_ "termsOfServiceHeader"}}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
-        <div class="modal-body  small-text">
-          <h2>Terms of Service</h2>
-          <p>These Terms of Service ("Terms") govern your access to and use of our services, including our various websites, APIs, applications, and other services (the "Services"), and any information, text, graphics, or other materials uploaded,
-            downloaded, or appearing on the Services (collectively referred to as "Content"). By accessing and using the Services, you agree to be bound by these Terms.</p>
+        <div class="modal-body small-text">
+          <h2>{{_ "termsOfServiceHeader"}}</h2>
+          <p>{{_ "termsIntro"}}</p>
 
-          <h4>1. Basic Terms</h4>
-          <p>You are responsible for your use of the Services and for any Content you provide, including compliance with applicable laws, rules, and regulations. You should only provide Content that you are comfortable sharing with others.</p>
+          <h4>1. {{_ "basicTerms"}}</h4>
+          <p>{{_ "basicTermsDesc"}}</p>
 
-          <h4>2. Privacy</h4>
-          <p>Our Services are designed to avoid the need for you to share sensitive personal information. Do NOT submit sensitive personal data to our Services, including but not limited to Social Security numbers, driver's license numbers, bank
-            account details, credit card numbers, passwords, medical information, or any other information that could be used for identity theft or other fraudulent purposes.</p>
+          <h4>2. {{_ "privacy"}}</h4>
+          <p>{{_ "privacyDesc"}}</p>
 
-          <h4>3. Content and Data Processing</h4>
-          <p>When you submit text for processing, you understand and accept that your text is sent to OpenAI's servers for processing. Our Service, through OpenAI, makes use of sophisticated language models that 'read' the text you input and
-            generate responses based on that input. It's important to note that OpenAI does not store your input data for more than 30 days.</p>
+          <h4>3. {{_ "contentAndDataProcessing"}}</h4>
+          <p>{{_ "contentAndDataProcessingDesc"}}</p>
 
-          <h4>4. Your Rights</h4>
-          <p>You retain your rights to any Content you submit, post, or display on or through the Services.</p>
+          <h4>4. {{_ "yourRights"}}</h4>
+          <p>{{_ "yourRightsDesc"}}</p>
 
-          <h4>5. Restrictions on Content and Use of the Services</h4>
-          <p>We reserve the right at all times (but will not have an obligation) to remove or refuse to distribute any Content on the Services, to suspend or terminate users, and to reclaim usernames without liability to you.</p>
+          <h4>5. {{_ "restrictions"}}</h4>
+          <p>{{_ "restrictionsDesc"}}</p>
 
-          <h4>6. Liability and Warranty Disclaimer</h4>
-          <p>The Services are provided "as is" without warranty of any kind, express or implied, including, but not limited to, the implied warranties of title, non-infringement, integration, merchantability, and fitness for a particular purpose,
-            and any warranties implied by any course of performance or usage of trade, all of which are expressly disclaimed.</p>
+          <h4>6. {{_ "liabilityAndWarranty"}}</h4>
+          <p>{{_ "liabilityAndWarrantyDesc"}}</p>
 
-          <h4>7. Amendments</h4>
-          <p>We reserve the right to modify or replace these Terms at any time. Your use of the Services following the posting of any changes to these Terms constitutes acceptance of those changes.</p>
+          <h4>7. {{_ "amendments"}}</h4>
+          <p>{{_ "amendmentsDesc"}}</p>
 
-          <h4>8. Contact</h4>
-          <p>If you have any questions about these Terms, please contact us at support@prose.ninja</p>
-
+          <h4>8. {{_ "contact"}}</h4>
+          <p>{{_ "contactDesc"}}</p>
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close"}}</button>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -812,46 +805,48 @@
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Terms of Service</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body small-text">
-          <h4>Privacy Policy</h4>
-          <p>Your privacy is critically important to us. We adhere to the following principles to protect your privacy:</p>
+    <h4 class="modal-title">{{_ "termsOfService"}}</h4>
+    <button type="button" class="close" data-dismiss="modal">{{_ "close"}}</button>
+  </div>
 
-          <ul>
-            <li>We don’t ask for your personal information unless we truly need it.</li>
-            <li>We don’t share your personal information with anyone except to comply with the law or protect our rights.</li>
-            <li>We don’t store personal information on our servers unless required for the ongoing operation of one of our services.</li>
-          </ul>
+<!-- Modal body -->
+<div class="modal-body small-text">
+  <h4>{{_ "privacyPolicy"}}</h4>
+  <p>{{_ "privacyImportant"}}</p>
 
-          <h4>1. Information We Collect</h4>
-          <p>We only collect information about you if we have a reason to do so–for example, to provide our Services, to communicate with you, or to make our Services better.</p>
+  <ul>
+    <li>{{_ "notAskInfo"}}</li>
+    <li>{{_ "notShareInfo"}}</li>
+    <li>{{_ "notStoreInfo"}}</li>
+  </ul>
 
-          <h4>2. How We Use Information About You</h4>
-          <p>We use information about you for the purposes listed in this policy only. For example, we use the information to provide you with our Services, communicate with you, troubleshoot issues, secure against fraud and abuse, improve and
-            update our Services, analyze how people use our Services, serve personalized advertising, and as required by law or necessary for safety and integrity.</p>
+  <h4>{{_ "infoWeCollect"}}</h4>
+  <p>{{_ "reasonForCollectingInfo"}}</p>
 
-          <h4>3. How Information About You Is Shared</h4>
-          <p>We do not sell our users’ private personal information. We share information about you in the limited circumstances spelled out in this policy and with appropriate safeguards on your privacy.</p>
+  <h4>{{_ "howWeUseInfo"}}</h4>
+  <p>{{_ "useInfoPurpose"}}</p>
 
-          <h4>4. How Long We Keep Information</h4>
-          <p>We generally discard information about you when it’s no longer needed for the purposes for which we collect and use it–that is, when we’re done providing our Services to you, or after 30 days, whichever comes first.</p>
+  <h4>{{_ "howInfoIsShared"}}</h4>
+  <p>{{_ "notSellInfo"}}</p>
 
-          <h4>5. Security</h4>
-          <p>While no online service is 100% secure, we work very hard to protect information about you against unauthorized access, use, alteration, or destruction, and take reasonable measures to do so.</p>
+  <h4>{{_ "howLongWeKeepInfo"}}</h4>
+  <p>{{_ "discardInfo"}}</p>
 
-          <h4>6. Changes to This Policy</h4>
-          <p>We may revise this Privacy Policy from time to time, and will post the most current version on our website.</p>
+  <h4>{{_ "security"}}</h4>
+  <p>{{_ "onlineServiceSecurity"}}</p>
 
-          <p>If you have any questions about this Privacy Policy, please contact us at support@prose.ninja.</p>
-        </div>
+  <h4>{{_ "policyChanges"}}</h4>
+  <p>{{_ "revisePolicy"}}</p>
+
+  <p>{{_ "questionsContact"}}</p>
+</div>
+
 
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close"}}</button>
+
         </div>
       </div>
     </div>
@@ -866,86 +861,81 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="errorModalLabel">Login Error</h5>
+          <h5 class="modal-title" id="errorModalLabel">{{_ "loginError"}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body" id="errorModalText">
-          Unknown user or incorrect password.
+          {{_ "unknownUserOrPassword"}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ "close"}}</button>
         </div>
       </div>
     </div>
   </div>
 
-
-
-
   <form class="my-form" id="login-form">
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <label class="sr-only" for="login-email">Email</label>
-        <input type="email" class="form-control mb-2" id="login-email" name="email" placeholder="Email">
+        <label class="sr-only" for="login-email">{{_ "email"}}</label>
+        <input type="email" class="form-control mb-2" id="login-email" name="email" placeholder="{{_ "email"}}">
       </div>
       <div class="col-auto">
-        <label class="sr-only" for="login-password">Password</label>
-        <input type="password" class="form-control mb-2" id="login-password" name="password" placeholder="Password">
+        <label class="sr-only" for="login-password">{{_ "password"}}</label>
+        <input type="password" class="form-control mb-2" id="login-password" name="password" placeholder="{{_ "password"}}">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-outline-secondary mb-2">Login</button>
+        <button type="submit" class="btn btn-outline-secondary mb-2">{{_ "login"}}</button>
       </div>
       <div class="col-auto">
-        <a href="#" class="register-link" id="register-link">Register for FREE</a>
+        <a href="#" class="register-link" id="register-link">{{_ "registerForFree"}}</a>
       </div>
       <div class="col-auto">
-        <a href="#" id="forgot-password-link">Forgot Password</a>
+        <a href="#" id="forgot-password-link">{{_ "forgotPassword"}}</a>
       </div>
-
     </div>
-
-
   </form>
 </template>
+
 
 <template name="myRegisterForm">
   <form class="my-form" id="register-form">
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <label class="sr-only" for="register-email">Email</label>
-        <input type="email" class="form-control mb-2" id="register-email" name="email" placeholder="Email">
-        <small id="emailHelp" class="form-text text-muted">Please enter a valid email address.</small>
-
+        <label class="sr-only" for="register-email">{{_ "email"}}</label>
+        <input type="email" class="form-control mb-2" id="register-email" name="email" placeholder="{{_ "email"}}">
+        <small id="emailHelp" class="form-text text-muted">{{_ "validEmail"}}</small>
       </div>
       <div class="col-auto">
-        <label class="sr-only" for="register-password">Password</label>
-        <input type="password" class="form-control mb-2" id="register-password" name="password" placeholder="Password" minlength="7">
-        <small id="passwordHelp" class="form-text text-muted">7 characters minimum</small>
+        <label class="sr-only" for="register-password">{{_ "password"}}</label>
+        <input type="password" class="form-control mb-2" id="register-password" name="password" placeholder="{{_ "password"}}" minlength="7">
+        <small id="passwordHelp" class="form-text text-muted">{{_ "minCharacters"}}</small>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-outline-secondary mb-2">Register</button>
+        <button type="submit" class="btn btn-outline-secondary mb-2">{{_ "register"}}</button>
       </div>
       <div class="col-auto">
-        <a href="#" id="login-link">Login</a>
+        <a href="#" id="login-link">{{_ "login"}}</a>
       </div>
     </div>
   </form>
 </template>
 
+
 <template name="myForgotPasswordForm">
   <form class="my-form" id="forgot-password-form">
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <label class="sr-only" for="forgot-password-email">Email</label>
-        <input type="email" class="form-control mb-2" id="forgot-password-email" name="email" placeholder="Email">
+        <label class="sr-only" for="forgot-password-email">{{_ "email"}}</label>
+        <input type="email" class="form-control mb-2" id="forgot-password-email" name="email" placeholder="{{_ "email"}}">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-outline-secondary mb-2">Reset Password</button>
+        <button type="submit" class="btn btn-outline-secondary mb-2">{{_ "resetPassword"}}</button>
       </div>
       <div class="col-auto">
-        <a href="#" id="login-link">Login</a>
+        <a href="#" id="login-link">{{_ "login"}}</a>
       </div>
     </div>
   </form>

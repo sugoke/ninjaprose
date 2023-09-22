@@ -622,7 +622,8 @@
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                  <label for="parameters1Tab1">Output language:</label>
+                  <label for="parameters1Tab1">{{_ "outputLanguage"}}</label>
+
                   <select class="form-control" id="languageSelect">
                     {{#each languageOptions}}
                       <option value="{{this}}">{{this}}</option>
@@ -633,7 +634,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                  <label for="parameters2Tab1">Tone:</label>
+                  <label for="parameters2Tab1">{{_ "tone"}}</label>
+
                   <select class="form-control" id="formalitySelect">
                     {{#each formalityOptions}}
                       <option value="{{this}}">{{this}}</option>

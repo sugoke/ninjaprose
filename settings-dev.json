@@ -2,7 +2,7 @@
   "galaxy.meteor.com": {
     "env": {
       "MONGO_URL": "mongodb://localhost:3001/meteor",
-      "OPENAI_API_KEY": "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",
+      "OPENAI_API_KEY": "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",
       "STRIPE_SECRET_KEY": "sk_test_51N85NmI01LsmAZDbH8VRGWJDVppfvb7VBx6AxHtQCtRKIpJKku9voh32cO52s2W3MJWQrlVFCK7KkRXd6fHI6alV0060xcS2ZL",
 
 

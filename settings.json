@@ -2,8 +2,8 @@
   "galaxy.meteor.com": {
     "env": {
       "MONGO_URL": "mongodb+srv://sugoke:Luxembourg01@prose.yqcbni4.mongodb.net/?retryWrites=true&w=majority",
-      "OPENAI_API_KEY": "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",
-      "STRIPE_SECRET_KEY": "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",
+      "OPENAI_API_KEY": "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",
+      "STRIPE_SECRET_KEY": "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",
       "PRICE_ID": "price_1NNbgVI01LsmAZDbDkU3K6Xe",
       "MAIL_URL": "smtp://leregina06@gmail.com:FDB49AC32542B83423ACAD0E6388F938853C@smtp.elasticemail.com:2525",
       "ROOT_URL": "https://prose.ninja"

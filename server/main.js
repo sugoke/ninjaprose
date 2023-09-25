@@ -8,7 +8,7 @@ import '../lib/router.js'
 import {
   Accounts
 } from 'meteor/accounts-base';
-
+const TAPi18n = require('meteor/tap:i18n').TAPi18n;
 
 import Stripe from 'stripe';
 const stripe = Stripe(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
@@ -29,7 +29,7 @@ import {
 if (Meteor.isServer) {
   Meteor.startup(() => {
     console.log('MONGO_URL:', Meteor.settings['galaxy.meteor.com'].env.MONGO_URL);
-    console.log('STRIPE_PRICE:', Meteor.settings['galaxy.meteor.com'].env.PRICE_ID);
+
 
 
 
@@ -43,28 +43,40 @@ Accounts.emailTemplates.resetPassword.subject = function() {
 };
 
 Accounts.emailTemplates.resetPassword.html = function(user, url) {
+  const userLang = user.profile.preferredLanguage || 'en';
+
+  const helloText = TAPi18n.__('helloText', {}, userLang);
+  const instructionText = TAPi18n.__('instructionText_resetPassword', {}, userLang);
+  const buttonText = TAPi18n.__('buttonText_resetPassword', {}, userLang);
+
   return `
     <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 4px;">
-        <h1 style="color: #333; font-size: 24px;">Hello, this is Prose Ninja</h1>
-        <p style="color: #666; font-size: 16px;">Click the link below to reset your password:</p>
-        <a href="${url}" style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #3498db; border-radius: 4px; text-decoration: none;">Reset Password</a>
+        <h1 style="color: #333; font-size: 24px;">${helloText}</h1>
+        <p style="color: #666; font-size: 16px;">${instructionText}</p>
+        <a href="${url}" style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #3498db; border-radius: 4px; text-decoration: none;">${buttonText}</a>
       </div>
     </div>
   `;
 };
 
-Accounts.emailTemplates.verifyEmail.subject = function() {
-  return 'Verify your email address';
+Accounts.emailTemplates.verifyEmail.subject = function(user) {
+  const userLang = user.profile.preferredLanguage || 'en';
+  return TAPi18n.__('verifyEmailSubject', {}, userLang);
 };
 
 Accounts.emailTemplates.verifyEmail.html = function(user, url) {
+  const userLang = user.profile.preferredLanguage || 'en';
+  const helloThisIs = TAPi18n.__('helloThisIs', {}, userLang);
+  const clickToVerify = TAPi18n.__('clickToVerify', {}, userLang);
+  const verifyEmailButton = TAPi18n.__('verifyEmailButton', {}, userLang);
+
   return `
     <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 4px;">
-        <h1 style="color: #333; font-size: 24px;">Hello, this is Prose Ninja</h1>
-        <p style="color: #666; font-size: 16px;">Click the link below to verify your email address:</p>
-        <a href="${url}" style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #3498db; border-radius: 4px; text-decoration: none;">Verify Email</a>
+        <h1 style="color: #333; font-size: 24px;">${helloThisIs}</h1>
+        <p style="color: #666; font-size: 16px;">${clickToVerify}</p>
+        <a href="${url}" style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #3498db; border-radius: 4px; text-decoration: none;">${verifyEmailButton}</a>
       </div>
     </div>
   `;
@@ -394,6 +406,12 @@ Meteor.methods({
     },
 
   'getPolishedText': function(text, formality, language) {
+
+    if (language === "Même Langue" || language === "Same") {
+  language = "the same language that was used";
+}
+
+
       if (!text || !formality || !language) {
         throw new Meteor.Error('Invalid parameters');
       }
@@ -403,7 +421,7 @@ Meteor.methods({
         'Authorization': `Bearer ${Meteor.settings['galaxy.meteor.com'].env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json'
       };
-      const prompt = `Polish and make this text longer: "${text}" and write it in  "${language}" with a very "${formality}" tone.
+      const prompt = `Polish and make this text longer: "${text}" and write it in  "${language}" with a very "${formality}" tone. Don't be cheesy.
     Write nice longer sentences. If the text seems to be a message to someone, add the necessary greetings and line breaks. Make it look natural, as written by a human.`;
       const data = {
         'prompt': prompt,
@@ -427,6 +445,12 @@ Meteor.methods({
     ,
 
   'getReplyToMessage': function(text, formality, language, answer) {
+
+    if (language === "Même Langue" || language === "Same") {
+  language = "the same language that was used";
+}
+
+
     if (!text || !formality || !language) {
       throw new Meteor.Error('Invalid parameters');
     }
@@ -591,5 +615,17 @@ Meteor.users.update(userId, {
     } else {
       throw new Meteor.Error('No subscription found for this user.');
     }
-  }
+  },
+
+  updateLanguagePreference(language) {
+   check(language, String);
+
+   if (!this.userId) {
+     throw new Meteor.Error('not-authorized');
+   }
+
+   Meteor.users.update(this.userId, {
+     $set: { 'profile.preferredLanguage': language }
+   });
+ }
 });

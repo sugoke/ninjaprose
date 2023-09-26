@@ -31,20 +31,25 @@ Meteor.startup(() => {
 
 
 Tracker.autorun(() => {
+  let preferredLanguage = 'en';  // Default language, change as needed
+
   const user = Meteor.user();
   if (user && user.profile && user.profile.preferredLanguage) {
-    const preferredLanguage = user.profile.preferredLanguage;
-
-    TAPi18n.setLanguage(preferredLanguage)
-      .done(function () {
-        console.log(`Language switched to ${preferredLanguage}`);
-      })
-      .fail(function (error_message) {
-        // Handle the error
-        console.log(error_message);
-      });
+    preferredLanguage = user.profile.preferredLanguage;
+  } else if (Session.get('preferredLanguage')) {
+    preferredLanguage = Session.get('preferredLanguage');
   }
+
+  TAPi18n.setLanguage(preferredLanguage)
+    .done(function () {
+      console.log(`Language switched to ${preferredLanguage}`);
+    })
+    .fail(function (error_message) {
+      // Handle the error
+      console.log(error_message);
+    });
 });
+
 
 
 // When the user navigates to the verification link provided in the email

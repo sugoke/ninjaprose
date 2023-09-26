@@ -10,6 +10,71 @@ import {
 } from 'meteor/accounts-base';
 const TAPi18n = require('meteor/tap:i18n').TAPi18n;
 
+
+Meteor.startup(() => {
+  // Check if app is running in production
+  if (process.env.NODE_ENV === 'production') {
+    // Use environment variables directly set in Galaxy's dashboard
+    process.env.MONGO_URL = process.env.MONGO_URL;
+    process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+    process.env.STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+    process.env.PRICE_ID = process.env.PRICE_ID;
+    process.env.MAIL_URL = process.env.MAIL_URL;
+    process.env.ROOT_URL = process.env.ROOT_URL;
+    process.env.STRIPE_PUBLIC_KEY = process.env.STRIPE_PUBLIC_KEY;
+    process.env.PRICE_ID_EUR = process.env.PRICE_ID_EUR;
+    process.env.PRICE_ID_USD = process.env.PRICE_ID_USD;
+
+    // Log to check if variables are set
+    console.log("Running in production mode. Environment variables:");
+    console.log("MONGO_URL:", process.env.MONGO_URL);
+    console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
+    console.log("STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY);
+    console.log("PRICE_ID:", process.env.PRICE_ID);
+    console.log("MAIL_URL:", process.env.MAIL_URL);
+    console.log("ROOT_URL:", process.env.ROOT_URL);
+    console.log("STRIPE_PUBLIC_KEY:", process.env.STRIPE_PUBLIC_KEY);
+    console.log("PRICE_ID_EUR:", process.env.PRICE_ID_EUR);
+    console.log("PRICE_ID_USD:", process.env.PRICE_ID_USD);
+
+  } else {
+    // Use settings from a local JSON file
+    const localSettings = Meteor.settings['galaxy.meteor.com'].env;
+    process.env.MONGO_URL = localSettings.MONGO_URL;
+    process.env.OPENAI_API_KEY = localSettings.OPENAI_API_KEY;
+    process.env.STRIPE_SECRET_KEY = localSettings.STRIPE_SECRET_KEY;
+    process.env.PRICE_ID = localSettings.PRICE_ID;
+    process.env.MAIL_URL = localSettings.MAIL_URL;
+    process.env.ROOT_URL = localSettings.ROOT_URL;
+
+    const publicSettings = Meteor.settings.public;
+    process.env.STRIPE_PUBLIC_KEY = publicSettings.STRIPE_PUBLIC_KEY;
+    process.env.PRICE_ID_EUR = publicSettings.PRICE_ID_EUR;
+    process.env.PRICE_ID_USD = publicSettings.PRICE_ID_USD;
+
+    // Log to check if variables are set
+    console.log("Running in development mode. Environment variables:");
+    console.log("MONGO_URL:", process.env.MONGO_URL);
+    console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
+    console.log("STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY);
+    console.log("PRICE_ID:", process.env.PRICE_ID);
+    console.log("MAIL_URL:", process.env.MAIL_URL);
+    console.log("ROOT_URL:", process.env.ROOT_URL);
+    console.log("STRIPE_PUBLIC_KEY:", process.env.STRIPE_PUBLIC_KEY);
+    console.log("PRICE_ID_EUR:", process.env.PRICE_ID_EUR);
+    console.log("PRICE_ID_USD:", process.env.PRICE_ID_USD);
+  }
+});
+
+
+
+
+
+
+
+
+
+
 import Stripe from 'stripe';
 const stripe = Stripe(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
 const stripePub = Stripe(Meteor.settings['galaxy.meteor.com'].env.STRIPE_PUBLIC_KEY);

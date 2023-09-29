@@ -11,7 +11,16 @@ import moment from 'moment';
 import './main.html';
 import { Accounts } from 'meteor/accounts-base';
 
-const stripePub = Meteor.settings.public.STRIPE_PUBLIC_KEY;
+let yourEnvVar;
+
+Meteor.call('getEnvVar', function(err, result) {
+  if (err) {
+    console.log("Failed to get environment variable:", err);
+  } else {
+    stripePublic = result;
+    console.log("Received environment variable:", stripePublic);
+  }
+});
 
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Tracker } from 'meteor/tracker';
@@ -816,7 +825,7 @@ Template.checkoutForm.onRendered(function() {
       console.log("Failed to get environment variable:", err);
     } else {
       stripePublic = result;
-      console.log("Received environment variable:", yourEnvVar);
+      console.log("Received environment variable:", stripePublic);
     }
   });
 
@@ -877,14 +886,25 @@ if (!cardHolderName) {
   const selectedCurrencyButton = document.querySelector('.currency-button.active input');
   const selectedCurrency = selectedCurrencyButton ? selectedCurrencyButton.value : 'EUR';
 
-  let priceId;
-  if (selectedCurrency === 'EUR') {
-    console.log("eur");
-    priceId = Meteor.settings.public.PRICE_ID_EUR;
-  } else if (selectedCurrency === 'USD') {
-    console.log("usd");
-    priceId = Meteor.settings.public.PRICE_ID_USD;
-  }
+  Meteor.call('getPriceIds', function(err, result) {
+    if (err) {
+      console.log("Failed to get price IDs:", err);
+    } else {
+      let priceId;
+      const { PRICE_ID_EUR, PRICE_ID_USD } = result;
+
+      if (selectedCurrency === 'EUR') {
+        console.log("eur");
+        priceId = PRICE_ID_EUR;
+      } else if (selectedCurrency === 'USD') {
+        console.log("usd");
+        priceId = PRICE_ID_USD;
+      }
+
+      console.log("Selected price ID:", priceId);
+    }
+  });
+
 
   const { paymentMethod, error } = await stripe.createPaymentMethod({
     type: 'card',

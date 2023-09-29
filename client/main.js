@@ -881,24 +881,16 @@ if (!cardHolderName) {
   const selectedCurrencyButton = document.querySelector('.currency-button.active input');
   const selectedCurrency = selectedCurrencyButton ? selectedCurrencyButton.value : 'EUR';
 
-  Meteor.call('getPriceIds', function(err, result) {
-    if (err) {
-      console.log("Failed to get price IDs:", err);
-    } else {
-      let priceId;
-      const { PRICE_ID_EUR, PRICE_ID_USD } = result;
+  let priceId;
 
-      if (selectedCurrency === 'EUR') {
-        console.log("eur");
-        priceId = PRICE_ID_EUR;
-      } else if (selectedCurrency === 'USD') {
-        console.log("usd");
-        priceId = PRICE_ID_USD;
-      }
+  if (selectedCurrency === 'EUR') {
+    priceId = 'price_1NvghfI01LsmAZDb49UrIA88'; // Hard-coded EUR priceId
+  } else if (selectedCurrency === 'USD') {
+    priceId = 'price_1NvghfI01LsmAZDb99jzMs1S'; // Hard-coded USD priceId
+  }
 
-      console.log("Selected price ID:", priceId);
-    }
-  });
+  console.log("Selected Currency:", selectedCurrency);
+  console.log("Price ID:", priceId);
 
 
   const { paymentMethod, error } = await stripe.createPaymentMethod({

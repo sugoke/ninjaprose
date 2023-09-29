@@ -39,7 +39,7 @@ Meteor.startup(() => {
 
   } else {
     // Use settings from a local JSON file
-    const localSettings = Meteor.settings['galaxy.meteor.com'].env;
+    const localSettings = process.env;
     process.env.MONGO_URL = localSettings.MONGO_URL;
     process.env.OPENAI_API_KEY = localSettings.OPENAI_API_KEY;
     process.env.STRIPE_SECRET_KEY = localSettings.STRIPE_SECRET_KEY;
@@ -76,11 +76,11 @@ Meteor.startup(() => {
 
 
 import Stripe from 'stripe';
-const stripe = Stripe(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
-const stripePub = Stripe(Meteor.settings['galaxy.meteor.com'].env.STRIPE_PUBLIC_KEY);
-const stripePrice = Stripe(Meteor.settings['galaxy.meteor.com'].env.PRICE_ID);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripePub = Stripe(process.env.STRIPE_PUBLIC_KEY);
+const stripePrice = Stripe(process.env.PRICE_ID);
 
-process.env.MAIL_URL = Meteor.settings['galaxy.meteor.com'].env.MAIL_URL;
+process.env.MAIL_URL = process.env.MAIL_URL;
 
 
 
@@ -93,7 +93,7 @@ import {
 
 if (Meteor.isServer) {
   Meteor.startup(() => {
-    console.log('MONGO_URL:', Meteor.settings['galaxy.meteor.com'].env.MONGO_URL);
+    console.log('MONGO_URL:', process.env.MONGO_URL);
 
 
 
@@ -285,8 +285,8 @@ Meteor.methods({
 /*
   'createSubscription': async function(email, paymentMethodId) {
     try {
-      const stripe = require('stripe')(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
-      const planId = Meteor.settings['galaxy.meteor.com'].env.PRICE_ID;
+      const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+      const planId = process.env.PRICE_ID;
       console.log(planId);
 
       // Create customer
@@ -323,11 +323,11 @@ Meteor.methods({
 
 
  'startSubscription': async function(paymentMethodId) {
-   const stripe = require('stripe')(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
+   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
    const userId = this.userId;
    const user = Meteor.users.findOne(userId);
    const customerId = user.stripeCustomerId;
-   const priceId = Meteor.settings['galaxy.meteor.com'].env.PRICE_ID;
+   const priceId = process.env.PRICE_ID;
 
    // Attach the payment method to the customer
    await stripe.paymentMethods.attach(paymentMethodId, { customer: customerId });
@@ -455,7 +455,7 @@ Meteor.methods({
     return 0;
   },
   'stripe.createCustomer': function(email) {
-    const stripe = require('stripe')(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
     const customer = Meteor.wrapAsync(stripe.customers.create, stripe.customers)({
       email: email,
@@ -467,7 +467,7 @@ Meteor.methods({
 
 
   'getApiKey': function() {
-    return Meteor.settings['galaxy.meteor.com'].env.OPENAI_API_KEY;
+    return process.env.OPENAI_API_KEY;
     },
 
   'getPolishedText': function(text, formality, language) {
@@ -483,7 +483,7 @@ Meteor.methods({
 
       const url = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
       const headers = {
-        'Authorization': `Bearer ${Meteor.settings['galaxy.meteor.com'].env.OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json'
       };
       const prompt = `Polish and make this text longer: "${text}" and write it in  "${language}" with a very "${formality}" tone. Don't be cheesy.
@@ -522,7 +522,7 @@ Meteor.methods({
 
     const url = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
     const headers = {
-      'Authorization': `Bearer ${Meteor.settings['galaxy.meteor.com'].env.OPENAI_API_KEY}`,
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       'Content-Type': 'application/json'
     };
     const prompt = `Someone wrote me this e-mail: "${text}", answer to it in  "${language}" with a very "${formality}" tone.
@@ -547,10 +547,10 @@ Meteor.methods({
   },
 /*
   startSubscription: function(userId, paymentMethodId) {
-     const stripe = require('stripe')(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
+     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
      const user = Meteor.users.findOne(userId);
      const customerId = user.stripeCustomerId;
-     const subscriptionPriceId = Meteor.settings['galaxy.meteor.com'].env.PRICE_ID;
+     const subscriptionPriceId = process.env.PRICE_ID;
 
      // Attach the payment method to the customer
      stripe.paymentMethods.attach(paymentMethodId, {
@@ -582,7 +582,7 @@ Meteor.methods({
    },
 
   'attachPaymentMethod': function(customerId, paymentMethodId) {
-    const stripe = require('stripe')(Meteor.settings['galaxy.meteor.com'].env.STRIPE_SECRET_KEY);
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
     try {
       const paymentMethod = Meteor.wrapAsync(stripe.paymentMethods.attach, stripe.paymentMethods)(paymentMethodId, {

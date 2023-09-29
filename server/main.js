@@ -289,6 +289,15 @@ Meteor.methods({
     return process.env.YOUR_ENV_VAR;
   },
 
+
+  getPriceIds: function() {
+    return {
+      PRICE_ID_EUR: process.env.PRICE_ID_EUR,
+      PRICE_ID_USD: process.env.PRICE_ID_USD
+    };
+  },
+
+
   'resendVerificationEmail': function() {
     const userId = this.userId;
     if (!userId) {

@@ -807,7 +807,24 @@ Template.navBar.events({
 
 
 Template.checkoutForm.onRendered(function() {
-  stripe = Stripe(process.env.STRIPE_PUBLIC_KEY);
+
+
+  let yourEnvVar;
+
+  Meteor.call('getEnvVar', function(err, result) {
+    if (err) {
+      console.log("Failed to get environment variable:", err);
+    } else {
+      stripePublic = result;
+      console.log("Received environment variable:", yourEnvVar);
+    }
+  });
+
+
+
+  stripe = Stripe(stripePublic);
+
+
   const elements = stripe.elements();
   cardElement = elements.create('card');
   cardElement.mount('#payment-element');

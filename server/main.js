@@ -284,82 +284,10 @@ Accounts.onCreateUser(function(options, user) {
 ////////////////////////////////////
 
 Meteor.methods({
-/*
-  'createSubscription': async function(email, paymentMethodId) {
-    try {
-      const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-      const planId = process.env.PRICE_ID;
-      console.log(planId);
 
-      // Create customer
-      const customer = await stripe.customers.create({
-        email,
-      });
-
-      // Attach payment method
-      await stripe.paymentMethods.attach(paymentMethodId, {
-        customer: customer.id,
-      });
-
-      // Set default payment method
-      await stripe.customers.update(customer.id, {
-        invoice_settings: {
-          default_payment_method: paymentMethodId,
-        },
-      });
-
-      // Create subscription
-      const subscription = await stripe.subscriptions.create({
-        customer: customer.id,
-        items: [{ plan: planId }],
-        expand: ['latest_invoice.payment_intent'],
-      });
-
-      return subscription.latest_invoice.payment_intent.client_secret;
-
-    } catch (error) {
-      console.log('Stripe Error:', error);
-      throw new Meteor.Error('stripe-error', error.message);
-    }
+  getEnvVar: function() {
+    return process.env.YOUR_ENV_VAR;
   },
-
-
- 'startSubscription': async function(paymentMethodId) {
-   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-   const userId = this.userId;
-   const user = Meteor.users.findOne(userId);
-   const customerId = user.stripeCustomerId;
-   const priceId = process.env.PRICE_ID;
-
-   // Attach the payment method to the customer
-   await stripe.paymentMethods.attach(paymentMethodId, { customer: customerId });
-
-   // Set it as the default payment method
-   await stripe.customers.update(customerId, {
-     invoice_settings: {
-       default_payment_method: paymentMethodId,
-     },
-   });
-
-   // Create the subscription
-   const subscription = await stripe.subscriptions.create({
-     customer: customerId,
-     items: [{ price: priceId }],
-     expand: ['latest_invoice.payment_intent'],
-   });
-
-   // Save the subscription ID in the user document
-   Meteor.users.update(userId, {
-     $set: {
-       stripeSubscriptionId: subscription.id
-     }
-   });
-
-   // Return the entire subscription object, including the status and latest_invoice details
-   return subscription;
- },
-*/
-
 
   'resendVerificationEmail': function() {
     const userId = this.userId;
@@ -373,27 +301,7 @@ Meteor.methods({
     }
   },
 
-/*
-  'cancelSubscription': function(userId) {
-    check(userId, String);
 
-    const user = Meteor.users.findOne(userId);
-    const subscriptionId = user.stripeSubscriptionId; // fetch subscriptionId from user document
-
-    stripe.subscriptions.update(
-      subscriptionId, {
-        cancel_at_period_end: true
-      }
-    ).then(() => {
-      // handle successful cancellation
-      // You may want to update user's subscription status here, for example:
-      // Meteor.users.update(this.userId, { $set: { 'subscriptionStatus': 'cancelling' } });
-    }).catch((err) => {
-      // handle error
-      console.log(err);
-    });
-  },
-*/
   createUserAccount(email, password) {
     const userId = Accounts.createUser({
       email,
@@ -547,62 +455,7 @@ Meteor.methods({
     }
 
   },
-/*
-  startSubscription: function(userId, paymentMethodId) {
-     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-     const user = Meteor.users.findOne(userId);
-     const customerId = user.stripeCustomerId;
-     const subscriptionPriceId = process.env.PRICE_ID;
 
-     // Attach the payment method to the customer
-     stripe.paymentMethods.attach(paymentMethodId, {
-       customer: customerId,
-     });
-
-     // Set it as the default payment method
-     stripe.customers.update(customerId, {
-       invoice_settings: {
-         default_payment_method: paymentMethodId,
-       },
-     });
-
-     // Create the subscription
-     const subscription = stripe.subscriptions.create({
-       customer: customerId,
-       items: [{ price: subscriptionPriceId }],
-       expand: ['latest_invoice.payment_intent'],
-     });
-
-     // Save the subscription ID in the user document
-     Meteor.users.update(userId, {
-       $set: {
-         stripeSubscriptionId: subscription.id
-       }
-     });
-
-     return subscription;
-   },
-
-  'attachPaymentMethod': function(customerId, paymentMethodId) {
-    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-    try {
-      const paymentMethod = Meteor.wrapAsync(stripe.paymentMethods.attach, stripe.paymentMethods)(paymentMethodId, {
-        customer: customerId,
-      });
-      // Set the attached PaymentMethod as the default for the customer
-      Meteor.wrapAsync(stripe.customers.update, stripe.customers)(customerId, {
-        invoice_settings: {
-          default_payment_method: paymentMethod.id,
-        },
-      });
-      return true;
-    } catch (error) {
-      throw new Meteor.Error('stripe-error', error.message);
-    }
-  },
-
-*/
 'createSubscription': async function(paymentMethodId, priceId) {
 
 

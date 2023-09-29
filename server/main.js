@@ -69,8 +69,10 @@ Meteor.startup(() => {
 
 
 
-
-
+console.log("check:");
+console.log(process.env.STRIPE_SECRET_KEY);
+console.log(process.env.STRIPE_PUBLIC_KEY);
+console.log(process.env.PRICE_ID);
 
 
 

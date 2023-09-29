@@ -39,7 +39,7 @@ Meteor.startup(() => {
 
   } else {
     // Use settings from a local JSON file
-    const localSettings = process.env;
+    const localSettings = Meteor.settings['galaxy.meteor.com'].env;
     process.env.MONGO_URL = localSettings.MONGO_URL;
     process.env.OPENAI_API_KEY = localSettings.OPENAI_API_KEY;
     process.env.STRIPE_SECRET_KEY = localSettings.STRIPE_SECRET_KEY;
@@ -52,8 +52,12 @@ Meteor.startup(() => {
     process.env.PRICE_ID_EUR = publicSettings.PRICE_ID_EUR;
     process.env.PRICE_ID_USD = publicSettings.PRICE_ID_USD;
 
+
+
+
     // Log to check if variables are set
     console.log("Running in development mode. Environment variables:");
+    //console.log(process.env)
     console.log("MONGO_URL:", process.env.MONGO_URL);
     console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
     console.log("STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY);
@@ -285,8 +289,8 @@ Accounts.onCreateUser(function(options, user) {
 
 Meteor.methods({
 
-  getEnvVar: function() {
-    return process.env.YOUR_ENV_VAR;
+  getStripePublic: function() {
+    return process.env.STRIPE_PUBLIC_KEY;
   },
 
 

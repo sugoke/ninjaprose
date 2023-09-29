@@ -11,16 +11,6 @@ import moment from 'moment';
 import './main.html';
 import { Accounts } from 'meteor/accounts-base';
 
-let yourEnvVar;
-
-Meteor.call('getEnvVar', function(err, result) {
-  if (err) {
-    console.log("Failed to get environment variable:", err);
-  } else {
-    stripePublic = result;
-    console.log("Received environment variable:", stripePublic);
-  }
-});
 
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Tracker } from 'meteor/tracker';
@@ -29,13 +19,19 @@ import { Tracker } from 'meteor/tracker';
 //let stripe; // Declare at the top-level scope to make it accessible in other functions
 let cardElement; // Declare at the top-level scope to make it accessible in other functions
 
+// Declare stripe in a scope that makes it globally accessible
+let stripe;
+
+
 Meteor.startup(() => {
   // Initialize i18n
   TAPi18n.setLanguage('en'); // Set the default language
 
 
-  // Optionally, you can load translations here
-  // TAPi18n.loadTranslations({ ... });
+
+
+
+
 });
 
 
@@ -818,20 +814,19 @@ Template.navBar.events({
 Template.checkoutForm.onRendered(function() {
 
 
-  let yourEnvVar;
-
-  Meteor.call('getEnvVar', function(err, result) {
-    if (err) {
-      console.log("Failed to get environment variable:", err);
+  if (Meteor.isDevelopment) {
+      // Development key
+      stripePublic = 'pk_test_51N85NmI01LsmAZDbrkTx6A0Yxj0S4rGjINihNxdSR3O3gYgYr5dbQfOm4g5mAiLbYqkJtW4bizDYSos3rFqTckWZ0035d7Ou3q';
     } else {
-      stripePublic = result;
-      console.log("Received environment variable:", stripePublic);
+      // Production key
+      stripePublic = 'pk_live_51N85NmI01LsmAZDbpOtvhKjVNnlUJL3Hnc5G6xWvo9sUwZoaSIgu8sEhNC5lWiOfmbr7lxLfDWMNhZJtGQr2ntNH00t3r32I2j';
     }
-  });
 
 
 
+  // Initialize Stripe here
   stripe = Stripe(stripePublic);
+
 
 
   const elements = stripe.elements();

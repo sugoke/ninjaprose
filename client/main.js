@@ -610,19 +610,26 @@ Template.myLoginForm.events({
   'submit #login-form'(event) {
     event.preventDefault();
 
+    // Show spinner
+    document.getElementById('login-spinner').classList.remove('d-none');
+
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     Meteor.loginWithPassword(email, password, function(err) {
+      // Hide spinner
+      document.getElementById('login-spinner').classList.add('d-none');
+
       if (err) {
         // Show the error modal
         $('#errorModalText').text(TAPi18n.__('unknownUserOrWrongPassword')); // Update the modal text with the specific error message
         $('#errorModal').modal('show');
       } else {
-        // handle successful login
+        // Handle successful login
       }
     });
   },
+
 
 
 
@@ -671,34 +678,38 @@ Template.myRegisterForm.events({
   'submit #register-form'(event) {
     event.preventDefault();
 
+    // Show spinner
+    document.getElementById('register-spinner').classList.remove('d-none');
+
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     Meteor.call('createUserAccount', email, password, function(err) {
+      // Hide spinner
+      document.getElementById('register-spinner').classList.add('d-none');
+
       if (err) {
-        // handle error
+        // Handle error
         Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: err.message,
-});
+          icon: 'error',
+          title: 'Oops...',
+          text: err.message,
+        });
       } else {
-        // handle successful registration
+        // Handle successful registration
         Session.set('showRegisterForm', false);
 
         Meteor.loginWithPassword(email, password, function(err) {
           if (err) {
-            // handle error
+            // Handle error
           } else {
-            // handle successful login
+            // Handle successful login
           }
         });
       }
     });
-
-
-
   },
+
 
   'click #login-link'(event) {
     event.preventDefault();
@@ -796,7 +807,7 @@ Template.navBar.events({
 
 
 Template.checkoutForm.onRendered(function() {
-  stripe = Stripe(Meteor.settings.public.STRIPE_PUBLIC_KEY);
+  stripe = Stripe(process.env.STRIPE_PUBLIC_KEY);
   const elements = stripe.elements();
   cardElement = elements.create('card');
   cardElement.mount('#payment-element');

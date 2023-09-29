@@ -892,7 +892,11 @@
         <input type="password" class="form-control mb-2" id="login-password" name="password" placeholder="{{_ "password"}}">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-outline-secondary mb-2">{{_ "login"}}</button>
+        <button type="submit" class="btn btn-outline-secondary mb-2">
+    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="login-spinner"></span>
+    {{_ "login"}}
+  </button>
+
       </div>
       <div class="col-auto">
         <a href="#" class="register-link" id="register-link">{{_ "registerForFree"}}</a>
@@ -919,7 +923,11 @@
         <small id="passwordHelp" class="form-text text-muted">{{_ "minCharacters"}}</small>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-outline-secondary mb-2">{{_ "register"}}</button>
+        <button type="submit" class="btn btn-outline-secondary mb-2">
+    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="register-spinner"></span>
+    {{_ "register"}}
+  </button>
+
       </div>
       <div class="col-auto">
         <a href="#" id="login-link">{{_ "login"}}</a>

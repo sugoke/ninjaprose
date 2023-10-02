@@ -32,21 +32,6 @@
 </head>
 
 <body>
-  <!--
-  <select id="language-switcher">
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-  </select>
-
--->
-<div class="language-switcher">
-  <button class="language-button" id="switchToEnglish">
-    <img src="https://flagicons.lipis.dev/flags/4x3/gb.svg" alt="English">
-  </button>
-  <button class="language-button" id="switchToFrench">
-    <img src="https://flagicons.lipis.dev/flags/4x3/fr.svg" alt="Français">
-  </button>
-</div>
 
 
 <div id="hourlyLimit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="limitModalLabel" aria-hidden="true">
@@ -209,9 +194,24 @@
   <!-- Navigation Bar -->
   <nav class="navbar navbar-light bg-light">
     <span class="navbar-text float-left">
-      <a href="#" id="profile-link" data-toggle="modal" data-target="#profileModal">{{_ "profile"}}</a>
+      <a href="#" id="profile-link" data-toggle="modal" data-target="#profileModal">
+        <i class="fas fa-user-circle"></i> <!-- This is your FontAwesome icon -->
+        {{_ "profile"}}
+      </a>
     </span>
+
+    <!-- Language Switcher Buttons -->
+    <div class="language-switcher float-right">
+      <button class="language-button" id="switchToEnglish">
+        <img src="https://flagicons.lipis.dev/flags/4x3/gb.svg" alt="English">
+      </button>
+      <button class="language-button" id="switchToFrench">
+        <img src="https://flagicons.lipis.dev/flags/4x3/fr.svg" alt="Français">
+      </button>
+    </div>
   </nav>
+
+
 
 
     <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -754,7 +754,7 @@
       <p class="small-text">{{_ "forSupportText"}} <a href="mailto:support@prose.ninja">{{_ "supportEmail"}}</a>.</p>
     </div>
 
-
+<br>
 
   <!-- The Modal -->
   <div class="modal" id="termsModal">

@@ -15,6 +15,8 @@ background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
         100% { transform: scale(1); }
     }
 
+
+
     a.register-link {
         background-color: #FF4500;
         color: #fff;
@@ -132,7 +134,7 @@ background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
     .container {
       background-color: rgba(255,255,255,0.7);
       padding: 20px;
-      border-radius: 20px;
+
     }
 
     .navbar {
@@ -417,7 +419,7 @@ z-index: 10;
 }
 
 .swal2-container-class {
-  z-index: 20000 !important;  /* Choose a high value that is above your highest modal z-index */
+  z-index: 9999999 !important;  /* Choose a high value that is above your highest modal z-index */
 }
 
 .currency-button.active {
@@ -439,9 +441,11 @@ z-index: 10;
 .language-switcher {
   display: flex;
   justify-content: center;
+    border: none;
 }
 
-.language-button img {
-  width: 20px;
+.language-button  {
+  width: 50px;
   height: auto;
+  border: none;
 }

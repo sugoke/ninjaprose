@@ -9,11 +9,17 @@ import '../lib/router.js'
 import Swal from 'sweetalert2'
 import moment from 'moment';
 import './main.html';
-import { Accounts } from 'meteor/accounts-base';
+import {
+  Accounts
+} from 'meteor/accounts-base';
 
 
-import { TAPi18n } from 'meteor/tap:i18n';
-import { Tracker } from 'meteor/tracker';
+import {
+  TAPi18n
+} from 'meteor/tap:i18n';
+import {
+  Tracker
+} from 'meteor/tracker';
 
 
 //let stripe; // Declare at the top-level scope to make it accessible in other functions
@@ -36,7 +42,7 @@ Meteor.startup(() => {
 
 
 Tracker.autorun(() => {
-  let preferredLanguage = 'en';  // Default language, change as needed
+  let preferredLanguage = 'en'; // Default language, change as needed
 
   const user = Meteor.user();
   if (user && user.profile && user.profile.preferredLanguage) {
@@ -46,10 +52,10 @@ Tracker.autorun(() => {
   }
 
   TAPi18n.setLanguage(preferredLanguage)
-    .done(function () {
+    .done(function() {
       console.log(`Language switched to ${preferredLanguage}`);
     })
-    .fail(function (error_message) {
+    .fail(function(error_message) {
       // Handle the error
       console.log(error_message);
     });
@@ -70,7 +76,7 @@ Accounts.onEmailVerificationLink((token, done) => {
       const successMsg = TAPi18n.__('verification_success');
       const successTitle = TAPi18n.__('success');
       Swal.fire(successTitle, successMsg, 'success');
-      done();  // Important: Call the done function to continue with the default behavior if needed.
+      done(); // Important: Call the done function to continue with the default behavior if needed.
     }
   });
 
@@ -174,14 +180,14 @@ Template.formTemplate.helpers({
 Template.formTemplate.helpers({
 
   hasVerifiedEmail: function() {
-     const user = Meteor.user();
-     if (!user) {
-       return false;
-     }
+    const user = Meteor.user();
+    if (!user) {
+      return false;
+    }
 
-     const email = user && user.emails && user.emails[0];
-     return email && email.verified;
-   },
+    const email = user && user.emails && user.emails[0];
+    return email && email.verified;
+  },
 
   clientHasCancelled() {
     const user = Meteor.user();
@@ -211,139 +217,139 @@ Template.navBar.helpers({
   },
 
   'email': function() {
-     return Meteor.user() && Meteor.user().emails && Meteor.user().emails[0] && Meteor.user().emails[0].address;
-   },
+    return Meteor.user() && Meteor.user().emails && Meteor.user().emails[0] && Meteor.user().emails[0].address;
+  },
 
-   isPaying() {
-       const user = Meteor.user();
-       return user && user.profile.isPaying;
-     },
-     cancelAtPeriodEnd() {
-       const user = Meteor.user();
-       return user && user.profile.cancelAtPeriodEnd;
-     },
-     shouldShowNextBillingDate() {
-       const user = Meteor.user();
-       return user && user.profile.subscriptionEndsAt && (user.profile.isPaying || user.profile.cancelAtPeriodEnd);
-     },
-     cancellationInProgress() {
-       const user = Meteor.user();
-       return user && user.profile && 'cancellationInProgress' in user.profile && user.profile.cancellationInProgress;
-     },
-     subscriptionEndsAt() {
-       const user = Meteor.user();
-       if (user && user.profile.currentPeriodEnd) {
-         return moment.unix(user.profile.currentPeriodEnd).format("MMMM Do, YYYY");
-       }
-       return "N/A";
-     },
-     serviceEndsAt() {
-       const user = Meteor.user();
-       if (user && user.profile.serviceEndsAt) {
-         return moment.unix(user.profile.serviceEndsAt).format("MMMM Do, YYYY");
-       }
-       return "N/A";
-     },
- // ...other existing helpers...
+  isPaying() {
+    const user = Meteor.user();
+    return user && user.profile.isPaying;
+  },
+  cancelAtPeriodEnd() {
+    const user = Meteor.user();
+    return user && user.profile.cancelAtPeriodEnd;
+  },
+  shouldShowNextBillingDate() {
+    const user = Meteor.user();
+    return user && user.profile.subscriptionEndsAt && (user.profile.isPaying || user.profile.cancelAtPeriodEnd);
+  },
+  cancellationInProgress() {
+    const user = Meteor.user();
+    return user && user.profile && 'cancellationInProgress' in user.profile && user.profile.cancellationInProgress;
+  },
+  subscriptionEndsAt() {
+    const user = Meteor.user();
+    if (user && user.profile.currentPeriodEnd) {
+      return moment.unix(user.profile.currentPeriodEnd).format("MMMM Do, YYYY");
+    }
+    return "N/A";
+  },
+  serviceEndsAt() {
+    const user = Meteor.user();
+    if (user && user.profile.serviceEndsAt) {
+      return moment.unix(user.profile.serviceEndsAt).format("MMMM Do, YYYY");
+    }
+    return "N/A";
+  },
+  // ...other existing helpers...
 
- currentUserProfile() {
-     const user = Meteor.user();
-     if (user && user.profile) {
-       console.log("Current period end:", user.profile.currentPeriodEnd);
-     }
-     return user ? user.profile : null;
-   },
-   currentPeriodEndFormatted() {
-     if (this.currentPeriodEnd) {
-       console.log("Formatted date:", moment.unix(this.currentPeriodEnd).format('MMMM Do, YYYY'));
-       return moment.unix(this.currentPeriodEnd).format('MMMM Do, YYYY');
-     } else {
-       console.log("currentPeriodEnd is not available or not a valid timestamp");
-       return null;
-     }
-   },
- // ...other existing helpers...
+  currentUserProfile() {
+    const user = Meteor.user();
+    if (user && user.profile) {
+      console.log("Current period end:", user.profile.currentPeriodEnd);
+    }
+    return user ? user.profile : null;
+  },
+  currentPeriodEndFormatted() {
+    if (this.currentPeriodEnd) {
+      console.log("Formatted date:", moment.unix(this.currentPeriodEnd).format('MMMM Do, YYYY'));
+      return moment.unix(this.currentPeriodEnd).format('MMMM Do, YYYY');
+    } else {
+      console.log("currentPeriodEnd is not available or not a valid timestamp");
+      return null;
+    }
+  },
+  // ...other existing helpers...
 });
 
 Template.navBar.events({
 
   'click .btn[data-target="#checkoutModal"]': function(event, template) {
-  $('#profileModal').modal('hide'); // Close the profileModal
-  $('#checkoutModal').modal('show'); // Open the checkoutModal
-},
+    $('#profileModal').modal('hide'); // Close the profileModal
+    $('#checkoutModal').modal('show'); // Open the checkoutModal
+  },
 
-'click #resendVerificationLink': function(event) {
-  event.preventDefault();
+  'click #resendVerificationLink': function(event) {
+    event.preventDefault();
 
-  Meteor.call('resendVerificationEmail', (error, response) => {
-    if (error) {
-      console.error("Error resending verification email:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: TAPi18n.__('errorSendingEmail')
-      });
-    } else {
-      Swal.fire({
-        icon: 'success',
-        title: TAPi18n.__('verificationEmailSent'),
-        text: TAPi18n.__('checkInbox')
-      });
-    }
-  });
-},
+    Meteor.call('resendVerificationEmail', (error, response) => {
+      if (error) {
+        console.error("Error resending verification email:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: TAPi18n.__('errorSendingEmail')
+        });
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: TAPi18n.__('verificationEmailSent'),
+          text: TAPi18n.__('checkInbox')
+        });
+      }
+    });
+  },
 
 
-   'click #confirmUnsubscribeButton': function() {
+  'click #confirmUnsubscribeButton': function() {
 
-     console.log("user clicked yes twice")
+    console.log("user clicked yes twice")
 
-   },
+  },
 
-   'click #unsubscribeLink': function(event, template) {
-     event.preventDefault();
+  'click #unsubscribeLink': function(event, template) {
+    event.preventDefault();
 
-     Swal.fire({
-       title: TAPi18n.__('areYouSure'),
-       text: TAPi18n.__('cancelSubscriptionQuestion'),
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonText: TAPi18n.__('yes'),
-       cancelButtonText: TAPi18n.__('no')
-     }).then((result) => {
-       if (result.isConfirmed) {
-         const user = Meteor.user();
-         const subscriptionId = user.profile.subscriptionId;
+    Swal.fire({
+      title: TAPi18n.__('areYouSure'),
+      text: TAPi18n.__('cancelSubscriptionQuestion'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: TAPi18n.__('yes'),
+      cancelButtonText: TAPi18n.__('no')
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const user = Meteor.user();
+        const subscriptionId = user.profile.subscriptionId;
 
-         Meteor.call('cancelSubscription', subscriptionId, (error, result) => {
-           if (error) {
-             console.log("An error occurred while canceling the subscription:", error);
+        Meteor.call('cancelSubscription', subscriptionId, (error, result) => {
+          if (error) {
+            console.log("An error occurred while canceling the subscription:", error);
 
-             Swal.fire({
-               title: 'Error!',
-               text: TAPi18n.__('errorCanceling'),
-               icon: 'error',
-               confirmButtonText: TAPi18n.__('ok')
-             });
-             return;
-           }
+            Swal.fire({
+              title: 'Error!',
+              text: TAPi18n.__('errorCanceling'),
+              icon: 'error',
+              confirmButtonText: TAPi18n.__('ok')
+            });
+            return;
+          }
 
-           if (result) {
-             console.log("Subscription successfully canceled.");
+          if (result) {
+            console.log("Subscription successfully canceled.");
 
-             Swal.fire({
-               title: 'Success!',
-               text: TAPi18n.__('successCanceling'),
-               icon: 'success',
-               confirmButtonText: TAPi18n.__('ok')
-             }).then(() => {
-               $('#yourModalId').modal('hide');
-             });
-           }
-         });
-       }
-     });
-   }
+            Swal.fire({
+              title: 'Success!',
+              text: TAPi18n.__('successCanceling'),
+              icon: 'success',
+              confirmButtonText: TAPi18n.__('ok')
+            }).then(() => {
+              $('#yourModalId').modal('hide');
+            });
+          }
+        });
+      }
+    });
+  }
 
 
 
@@ -470,7 +476,7 @@ Template.formTemplate.events({
           } else {
             document.getElementById('polishedText').value = result;
             document.getElementById('overlay').style.display = 'none';
-               document.body.style.overflow = 'auto'; // Reset the overflow property
+            document.body.style.overflow = 'auto'; // Reset the overflow property
           }
         });
 
@@ -523,26 +529,26 @@ Template.formTemplate.events({
 
 
   'click #pasteBtn2': function(event, instance) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (!navigator.clipboard) {
-    Swal.fire({
-      icon: 'error',
-      title: TAPi18n.__('oops'),
-      text: TAPi18n.__('clipboardNotAvailable'),
-    });
+    if (!navigator.clipboard) {
+      Swal.fire({
+        icon: 'error',
+        title: TAPi18n.__('oops'),
+        text: TAPi18n.__('clipboardNotAvailable'),
+      });
 
-    return;
-  }
+      return;
+    }
 
-  navigator.clipboard.readText()
-    .then(text => {
-      document.getElementById('messageToReplyTo').value = text;
-    })
-    .catch(err => {
-      console.error('Failed to read clipboard contents: ', err);
-    });
-},
+    navigator.clipboard.readText()
+      .then(text => {
+        document.getElementById('messageToReplyTo').value = text;
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+      });
+  },
 
 
   'click #clearBtn3': function(event, template) {
@@ -655,7 +661,9 @@ Template.myLoginForm.events({
 
     const email = event.target.email.value;
 
-    Accounts.forgotPassword({ email }, function(err) {
+    Accounts.forgotPassword({
+      email
+    }, function(err) {
       if (err) {
         Swal.fire({
           icon: 'error',
@@ -750,7 +758,9 @@ Template.myForgotPasswordForm.events({
 
     const email = event.target.email.value;
 
-    Accounts.forgotPassword({ email }, function(err) {
+    Accounts.forgotPassword({
+      email
+    }, function(err) {
       if (err) {
         Swal.fire({
           icon: 'error',
@@ -815,12 +825,12 @@ Template.checkoutForm.onRendered(function() {
 
 
   if (Meteor.isDevelopment) {
-      // Development key
-      stripePublic = 'pk_test_51N85NmI01LsmAZDbrkTx6A0Yxj0S4rGjINihNxdSR3O3gYgYr5dbQfOm4g5mAiLbYqkJtW4bizDYSos3rFqTckWZ0035d7Ou3q';
-    } else {
-      // Production key
-      stripePublic = 'pk_live_51N85NmI01LsmAZDbpOtvhKjVNnlUJL3Hnc5G6xWvo9sUwZoaSIgu8sEhNC5lWiOfmbr7lxLfDWMNhZJtGQr2ntNH00t3r32I2j';
-    }
+    // Development key
+    stripePublic = 'pk_test_51N85NmI01LsmAZDbrkTx6A0Yxj0S4rGjINihNxdSR3O3gYgYr5dbQfOm4g5mAiLbYqkJtW4bizDYSos3rFqTckWZ0035d7Ou3q';
+  } else {
+    // Production key
+    stripePublic = 'pk_live_51N85NmI01LsmAZDbpOtvhKjVNnlUJL3Hnc5G6xWvo9sUwZoaSIgu8sEhNC5lWiOfmbr7lxLfDWMNhZJtGQr2ntNH00t3r32I2j';
+  }
 
 
 
@@ -836,7 +846,9 @@ Template.checkoutForm.onRendered(function() {
   const currencyPriceDiv = document.getElementById('currency-price');
 
   // Initialize with EUR as the default
-  currencyPriceDiv.textContent = TAPi18n.__('eurPerMonth', { price: "8.90" });
+  currencyPriceDiv.textContent = TAPi18n.__('eurPerMonth', {
+    price: "8.90"
+  });
 
   // Add event listeners to currency buttons
   const currencyButtons = document.querySelectorAll('.currency-button');
@@ -847,9 +859,13 @@ Template.checkoutForm.onRendered(function() {
 
       const selectedCurrency = btn.querySelector('input').value;
       if (selectedCurrency === 'EUR') {
-        currencyPriceDiv.textContent = TAPi18n.__('eurPerMonth', { price: "8.90" });
+        currencyPriceDiv.textContent = TAPi18n.__('eurPerMonth', {
+          price: "8.90"
+        });
       } else if (selectedCurrency === 'USD') {
-        currencyPriceDiv.textContent = TAPi18n.__('usdPerMonth', { price: "9.90" });
+        currencyPriceDiv.textContent = TAPi18n.__('usdPerMonth', {
+          price: "9.90"
+        });
       }
     });
   });
@@ -865,51 +881,44 @@ Template.checkoutForm.helpers({
 
 Template.checkoutForm.events({
   'submit #payment-form': async function(event, template) {
-  event.preventDefault();
+    event.preventDefault();
 
-  // Check if card holder name is entered
-const cardHolderName = document.getElementById('card-holder-name').value;
-if (!cardHolderName) {
-  console.log("Card holder name is required.");
-  return;
-}
+    // Check if card holder name is entered
+    const cardHolderName = document.getElementById('card-holder-name').value;
+    if (!cardHolderName) {
+      console.log("Card holder name is required.");
+      return;
+    }
 
-  // Show spinner and disable button
-  document.getElementById('submit-button').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submit Payment';
-  document.getElementById('submit-button').disabled = true;
+    // Show spinner and disable button
+    document.getElementById('submit-button').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submit Payment';
+    document.getElementById('submit-button').disabled = true;
 
-  const selectedCurrencyButton = document.querySelector('.currency-button.active input');
-  const selectedCurrency = selectedCurrencyButton ? selectedCurrencyButton.value : 'EUR';
+    const selectedCurrencyButton = document.querySelector('.currency-button.active input');
+    const selectedCurrency = selectedCurrencyButton ? selectedCurrencyButton.value : 'EUR';
 
-  let priceId;
+    let priceId;
 
-  if (selectedCurrency === 'EUR') {
-    priceId = 'price_1NvghfI01LsmAZDb49UrIA88'; // Hard-coded EUR priceId
-  } else if (selectedCurrency === 'USD') {
-    priceId = 'price_1NvghfI01LsmAZDb99jzMs1S'; // Hard-coded USD priceId
-  }
+    if (selectedCurrency === 'EUR') {
+      priceId = 'price_1NvghfI01LsmAZDb49UrIA88'; // Hard-coded EUR priceId
+    } else if (selectedCurrency === 'USD') {
+      priceId = 'price_1NvghfI01LsmAZDb99jzMs1S'; // Hard-coded USD priceId
+    }
 
-  console.log("Selected Currency:", selectedCurrency);
-  console.log("Price ID:", priceId);
+    console.log("Selected Currency:", selectedCurrency);
+    console.log("Price ID:", priceId);
 
 
-  const { paymentMethod, error } = await stripe.createPaymentMethod({
-    type: 'card',
-    card: cardElement,
-  });
+    const {
+      paymentMethod,
+      error
+    } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    });
 
-  if (error) {
-    console.log("Error occurred:", error);
-
-    // Hide spinner and enable button
-    document.getElementById('submit-button').innerHTML = 'Submit Payment';
-    document.getElementById('submit-button').disabled = false;
-    return;
-  }
-
-  Meteor.call('createSubscription', paymentMethod.id, priceId, async (err, clientSecret) => {
-    if (err) {
-      console.log("Server-side error:", err);
+    if (error) {
+      console.log("Error occurred:", error);
 
       // Hide spinner and enable button
       document.getElementById('submit-button').innerHTML = 'Submit Payment';
@@ -917,38 +926,50 @@ if (!cardHolderName) {
       return;
     }
 
-    if (clientSecret) {
-      const { error: confirmError } = await stripe.confirmCardPayment(clientSecret);
-      if (confirmError) {
-        console.log("3D Secure confirmation failed:", confirmError);
+    Meteor.call('createSubscription', paymentMethod.id, priceId, async (err, clientSecret) => {
+      if (err) {
+        console.log("Server-side error:", err);
 
         // Hide spinner and enable button
         document.getElementById('submit-button').innerHTML = 'Submit Payment';
         document.getElementById('submit-button').disabled = false;
         return;
-      } else {
-        console.log("Subscription created with 3D Secure.");
-        Meteor.call('updateUserToPaying');
-        $("#checkoutModal").hide();
-        $(".modal-backdrop").hide();
       }
-    } else {
-      console.log("Subscription created without 3D Secure.");
-      Meteor.call('updateUserToPaying');
-    }
 
-    // Hide spinner and enable button
-    document.getElementById('submit-button').innerHTML = 'Submit Payment';
-    document.getElementById('submit-button').disabled = false;
-  });
-}
+      if (clientSecret) {
+        const {
+          error: confirmError
+        } = await stripe.confirmCardPayment(clientSecret);
+        if (confirmError) {
+          console.log("3D Secure confirmation failed:", confirmError);
+
+          // Hide spinner and enable button
+          document.getElementById('submit-button').innerHTML = 'Submit Payment';
+          document.getElementById('submit-button').disabled = false;
+          return;
+        } else {
+          console.log("Subscription created with 3D Secure.");
+          Meteor.call('updateUserToPaying');
+          $("#checkoutModal").hide();
+          $(".modal-backdrop").hide();
+        }
+      } else {
+        console.log("Subscription created without 3D Secure.");
+        Meteor.call('updateUserToPaying');
+      }
+
+      // Hide spinner and enable button
+      document.getElementById('submit-button').innerHTML = 'Submit Payment';
+      document.getElementById('submit-button').disabled = false;
+    });
+  }
 
 });
 
 Template.body.events({
   'click #switchToEnglish': function() {
     TAPi18n.setLanguage('en')
-      .done(function () {
+      .done(function() {
         console.log("Language switched to English");
 
         // Save the preferred language in the database if user is logged in
@@ -960,13 +981,13 @@ Template.body.events({
         }
 
       })
-      .fail(function (error_message) {
+      .fail(function(error_message) {
         // console.log(error_message);
       });
   },
   'click #switchToFrench': function() {
     TAPi18n.setLanguage('fr')
-      .done(function () {
+      .done(function() {
         console.log("Language switched to French");
 
         // Save the preferred language in the database if user is logged in
@@ -978,7 +999,7 @@ Template.body.events({
         }
 
       })
-      .fail(function (error_message) {
+      .fail(function(error_message) {
         // console.log(error_message);
       });
   }

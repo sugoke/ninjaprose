@@ -110,7 +110,7 @@
 "premiumPlan": "Premium plan",
 "thanksForSubscribing": "Thanks for being a subscriber! Enjoy your premium features.",
 "freePlan": "Free plan",
-"freeUserMessage": "As a free user, you get 1 text submission a day. Please subscribe for 9 EUR a month in order to use it fully.",
+"freeUserMessage": "As a free user, you get 1 text submission a day. Please subscribe for 9,90 USD a month in order to use it fully.",
 "cancelAnytime": "You can cancel anytime",
 "pleaseVerifyEmail": "Please verify your e-mail",
 "emailNotVerified": "Your e-mail is not verified, please click the link in your inbox.",
@@ -205,17 +205,17 @@
  "instructionText_resetPassword": "Click the link below to reset your password:",
  "buttonText_resetPassword": "Reset Password",
   "verifyEmailSubject": "Verify your email address",
-  "helloThisIs": "Hello, this is Prose Ninja",
+  "helloThisIs": "Dear new member, this is Prose Ninja",
 "clickToVerify": "Click the link below to verify your email address:",
 "verifyEmailButton": "Verify Email",
-"type_your_draft_here": "Tapez votre brouillon ici et appuyez sur soumettre.",
-"paste_the_message_you_received": "Paste the message you received.",
-  "type_idea_your_reply_should_convey": "Type here the idea your reply should convey.",
+"type_your_draft_here": "Type your draft message.",
+"paste_the_message_you_received": "Paste the received message.",
+  "type_idea_your_reply_should_convey": "The idea your reply should convey.",
   "subscription_required_title": "Subscription required",
   "subscription_required_body": "In order to use the service more than once a day, a subscription is required.",
   "close_button": "Close",
   "subscribe_button": "Subscribe",
-  "cancelSubscriptionQuestion": "Etes-vous certain de vouloir résilier?"
+  "cancelSubscriptionQuestion": "Are you sure you would like to unsubscribe?"
 
 
 

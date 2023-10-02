@@ -4,7 +4,7 @@
   "typeOrPaste": "Tapez ou collez un texte brut et le moteur intelligent produira un texte poli en quelques secondes.",
   "demo": "Demonstration",
   "proseNinjaDesc": "Prose Ninja est le compagnon idéal pour les écrivains, les étudiants, les professionnels et tous ceux qui souhaitent écrire avec aisance et style. Notre moteur intelligent vous aide à créer un beau texte qui résonne avec votre public.",
-  "subscriptionEndingSoon": "Abonnement se terminant bientôt",
+  "subscriptionEndingSoon": "Abonnement se terminant bientot",
   "subscriptionEndingText": "Votre abonnement se termine bientôt, mais vous avez toujours accès aux fonctionnalités premium. Souhaitez-vous vous réabonner?",
   "resubscribeButton": "Se réabonner",
   "copyrightText": "Droit d'auteur © 2023 Prose Ninja",
@@ -110,7 +110,7 @@
   "premiumPlan": "Plan premium",
   "thanksForSubscribing": "Merci d'être un abonné ! Profitez de vos fonctionnalités premium.",
   "freePlan": "Plan gratuit",
-  "freeUserMessage": "En tant qu'utilisateur gratuit, vous avez droit à 1 soumission de texte par jour. Veuillez vous abonner pour 9 EUR par mois afin de l'utiliser pleinement.",
+  "freeUserMessage": "En tant qu'utilisateur gratuit, vous avez droit à 1 soumission de texte par jour. Veuillez vous abonner pour 8,90 EUR par mois afin de l'utiliser pleinement.",
   "cancelAnytime": "Vous pouvez annuler à tout moment",
   "pleaseVerifyEmail": "Veuillez verifier votre e-mail",
   "emailNotVerified": "Votre e-mail n'est pas vérifié, veuillez cliquer sur le lien dans votre boîte de réception.",
@@ -206,7 +206,7 @@
   "buttonText_resetPassword": "Réinitialiser le mot de passe",
   "verifyEmailSubject": "Vérifiez votre adresse e-mail",
   "helloThisIs": "Bonjour, c'est Prose Ninja",
-  "clickToVerify": "Cliquez sur le lien ci-dessous pour vérifier votre adresse e-mail :",
+  "clickToVerify": "Merci de vérifier votre adresse e-mail :",
   "verifyEmailButton": "Vérifier l'Email",
   "type_your_draft_here": "Tapez votre texte ici",
   "paste_the_message_you_received": "Collez le message que vous avez reçu.",
@@ -215,7 +215,7 @@
   "subscription_required_body": "Pour utiliser le service plus d'une fois par jour, un abonnement est nécessaire.",
   "close_button": "Fermer",
   "subscribe_button": "S'abonner",
-  "cancelSubscriptionQuestion": "Are you sure you would like to unsubscribe?"
+  "cancelSubscriptionQuestion": "Etes-vous certain de vouloir vous désinscrire?"
 
 
 

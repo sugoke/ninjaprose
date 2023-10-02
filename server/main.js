@@ -409,8 +409,8 @@ Meteor.methods({
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json'
       };
-      const prompt = `Polish and make this text longer: "${text}" and write it in  "${language}" with a very "${formality}" tone. Don't be cheesy.
-    Write nice longer sentences. If the text seems to be a message to someone, add the necessary greetings and line breaks. Make it look natural, as written by a human.`;
+      const prompt = `Polish the text and make this text longer: "${text}" and write it in  "${language}" with a very "${formality}" tone. Don't be cheesy.
+    Write nice longer sentences. If the text seems to be a message to someone, add the necessary greetings and line breaks. Otherwise consider it as a normal text. Make it look natural, as written by a human.`;
       const data = {
         'prompt': prompt,
         'max_tokens': 500

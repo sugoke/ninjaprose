@@ -966,7 +966,7 @@ Template.checkoutForm.events({
 
 });
 
-Template.body.events({
+Template.formTemplate.events({
   'click #switchToEnglish': function() {
     TAPi18n.setLanguage('en')
       .done(function() {
